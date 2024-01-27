@@ -8,12 +8,12 @@ from sacremoses import MosesPunctNormalizer
 from sentence_splitter import SentenceSplitter
 from transformers import AutoModelForSeq2SeqLM, NllbTokenizer
 
-MODEL_URL = "slone/nllb-rus-tyv-v2-extvoc"
-L1 = "rus_Cyrl"
-L2 = "myv_Cyrl"
+MODEL_URL = "flutter-painter/nllb-fra-fuf-v2"
+L1 = "fra_Latn"
+L2 = "fuf_Latn"
 LANGUAGES = {
-    "Орус | Русский | Russian": L1,
-    "Тыва | Тувинский | Tyvan": L2,
+    "French": "fra_Latn",
+    "Fula": "fuf_Latn",
 }
 
 
@@ -35,8 +35,7 @@ def get_non_printing_char_replacer(replace_by: str = " ") -> tp.Callable[[str], 
 class TextPreprocessor:
     """
     Mimic the text preprocessing made for the NLLB model.
-    This code is adapted from the Stopes repo of the NLLB team:
-    https://github.com/facebookresearch/stopes/blob/main/stopes/pipelines/monolingual/monolingual_line_processor.py#L214
+    This code is adapted from the Stopes repo of the NLLB team on github
     """
 
     def __init__(self, lang="en"):
@@ -106,7 +105,7 @@ class Translator:
         self.tokenizer = NllbTokenizer.from_pretrained(MODEL_URL)
         fix_tokenizer(self.tokenizer)
 
-        self.splitter = SentenceSplitter("ru")
+        self.splitter = SentenceSplitter("fr")
         self.preprocessor = TextPreprocessor()
 
         self.languages = LANGUAGES

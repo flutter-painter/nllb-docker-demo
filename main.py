@@ -6,8 +6,8 @@ from translation import Translator
 
 class TranslationRequest(BaseModel):
     text: str
-    src_lang: str = "rus_Cyrl"
-    tgt_lang: str = "tyv_Cyrl"
+    src_lang: str = "fra_Latn"
+    tgt_lang: str = "fuf_Latn"
     by_sentence: bool = True
     preprocess: bool = True
 
